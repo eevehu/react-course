@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>React Basics!</title>
+
+  <style>
+    body {
+      margin: 0px;
+    }
+
+    .app-container {
+      display: flex;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+
+      gap: 16px
+    }
+
+    .input-button {
+      padding: 12px 16px;
+
+      color: white;
+      background-color: rgb(25, 135, 84);
+
+      border: 0px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="js-container"></div>
+
+  <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+  <script src="react-basics.js"></script>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script type="text/babel">
+    var clicked = 0;
+
+    function SaveInputText() {
+      const [count, setCount] = React.useState('Clicked 0 Times')
+      const [autoClicked, setAutoClicked] = React.useState(false);
+
+      const callButton = React.useRef(null);
+
+      function UpdateButton() {
+        clicked++;
+        clicked === 1 ? (
+          setCount("Clicked " + clicked + " Time")
+        ) : (
+          setCount("Clicked " + clicked + " Times")
+        )
+      }
+
+      React.useEffect(() => {
+        let timer;
+        if (autoClicked) {
+          timer = setInterval(() => {
+            if (callButton.current) {
+              callButton.current.click();
+            }
+          }, 1000);
+        } else {
+          clearInterval(timer);
+        }
+        return () => clearInterval(timer);
+      }, [autoClicked]);
+
+      function ToggleAutoClick() {
+        setAutoClicked(prev => !prev);
+      }
+
+      function ResetCounter() {
+        clicked = -1;
+        setAutoClicked(false);
+        UpdateButton();
+      }
+
+
+      function CreateButton() {
+        return (
+          <>
+            <button onClick={UpdateButton} ref={callButton} className="input-button">
+              {count}
+            </button>
+          </>
+        );
+      }
+
+      function CreateAutoClickButton() {
+        return (
+          <>
+            <button onClick={ToggleAutoClick} className="input-button">
+              Auto Click
+            </button>
+          </>
+        );
+      }
+
+      function CreateResetButton() {
+        return (
+          <>
+            <button onClick={ResetCounter} className="input-button">
+              Reset
+            </button>
+          </>
+        );
+      }
+
+
+      return (
+        <div className="app-container">
+          <CreateButton />
+          <CreateResetButton />
+          <CreateAutoClickButton />
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <SaveInputText />
+      );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+  </script>
+</body>
+
+</html>

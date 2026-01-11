@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>React Basics!</title>
   </head>
   <body>
     <div class="js-container"></div>
+    
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
 
-    <script>
-        console.log("hello");
-    </script>
+    <script src="react-basics.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+        
       const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render('Welcome to SuperSimpleDev React Course');
+      const root = ReactDOM.createRoot(container);
+      root.render();
     </script>
   </body>
 </html>

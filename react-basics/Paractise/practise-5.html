@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>React Basics!</title>
+
+    <style>
+      .on-button, .off-button {
+        padding: 12px 16px;
+        border-radius: 4px;
+        border: none;
+
+        color: white;
+        background-color: rgb(25, 135, 84);
+
+        cursor: pointer;
+      }
+      .off-button {
+        background-color: rgb(220, 53, 69);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+    
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <script src="react-basics.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      function ButtonSwitch(event) {
+        const [isButtonOn, setIsButtonOn] = React.useState(true);
+
+        const toggleButton = () => {
+          setIsButtonOn((isButtonOn) => !isButtonOn);
+        }
+
+        return (
+          <button 
+            className={isButtonOn ? "on-button" : "off-button"}
+            onClick={toggleButton}
+          >
+            {isButtonOn ? "ON" : "OFF"}
+          </button>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <ButtonSwitch />
+          </>
+        );
+      }
+
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+    </script>
+  </body>
+</html>

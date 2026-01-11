@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>React Basics!</title>
+    <style>
+      body {
+        margin: 0px 8px;
+      }
+
+      .app-container {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        max-width: 600px;
+
+        gap: 8px;
+      }
+      .button-container {
+        display: flex;
+        gap: 8px;
+      }
+
+      .input-button, .show-password {
+        font-size: 16px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        
+
+        color: white;
+        border: none;
+        background-color: rgb(0, 123, 255);
+
+        cursor: pointer; 
+      }
+
+      .input-field-container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .input-field {
+        padding: 12px 20px;
+        border-radius: 8px;
+        border-width: 1px;
+        width: 300px;
+      }
+      .password-container {
+        display: flex;
+        gap: 8px;
+      }
+      .show-password {
+        font-size: 12px;
+        
+        background-color: gray;
+      }
+
+      .header-text {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+    
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <script src="react-basics.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      function WebDesign() {
+        const [showPassword, setShowPassword] = React.useState(false);
+
+        const flipPassword = () => {
+          setShowPassword((showPassword) => !showPassword);
+          // console.log(showPassword);
+          // return (
+          //   showPassword === true 
+          //     ? "text"
+          //     : "password"
+          // );
+        }
+        
+        return (
+          <>
+            <p className="header-text">Hello, welcome to my website</p>
+
+            <div className="input-field-container">
+              <input type="text" placeholder="Email" className="input-field" />
+              <div className="password-container">
+                {showPassword === true 
+                  ? <input type="text" placeholder="Password" className="input-field" />
+                  : <input type="password" placeholder="Password" className="input-field" />
+                }
+                <button className="show-password" onClick={flipPassword}>Show</button>
+              </div>
+            </div>
+
+            <div className="button-container">
+              <button className="input-button">Login</button>
+              <button className="input-button">Sign Up</button>
+            </div>
+          </>
+        );
+      }
+
+      function App() {
+        return (
+          <div className="app-container">
+            <WebDesign />
+          </div>
+        );
+      }
+      
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+    </script>
+  </body>
+</html>
